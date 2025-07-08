@@ -15,6 +15,9 @@ jobs:
     permissions:
       contents: write
 
+    env:
+      FILE_TO_UPDATE: scheduled-file-update.txt
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -28,7 +31,6 @@ jobs:
 
       - name: Update file with current timestamp
         run: |
-          FILE_TO_UPDATE="scheduled-file-update.txt"
           echo "$(date '+%Y-%m-%d %H:%M:%S')" > "${FILE_TO_UPDATE}"
 
       - name: Commit and push changes
