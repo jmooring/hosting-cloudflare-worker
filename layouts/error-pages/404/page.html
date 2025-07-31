@@ -1,0 +1,11 @@
+{{ define "main" }}
+  <h1>{{ .Title }}</h1>
+
+  {{ with resources.Get "images/logos/hugo.png" }}
+    {{ with .Resize "x100" }}
+      <img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="404 error page">
+    {{ end }}
+  {{ end }}
+
+  {{ .Content }}
+{{ end }}

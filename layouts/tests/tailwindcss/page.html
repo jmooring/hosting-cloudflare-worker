@@ -1,0 +1,20 @@
+{{ define "main" }}
+  <h1>{{ .Title }}</h1>
+  {{ partial "dates.html" . }}
+  {{ .Content }}
+  {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+
+  {{ $css := `
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";`
+  }}
+
+  <h2>CSS</h2>
+  {{ highlight (trim $css "\n") "css" }}
+
+  <h2>CSS after processing with the Tailwind CSS CLI</h2>
+  {{ with $css | resources.FromString "temp/css" | css.TailwindCSS }}
+    {{ highlight (.Content | strings.TrimSpace) "css" }}
+  {{ end }}
+
+{{ end }}
