@@ -1,0 +1,21 @@
+{{ define "main" }}
+  <h1>{{ .Title }}</h1>
+  {{ partial "dates.html" . }}
+  {{ .Content }}
+  {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+
+  {{ $css := `
+::placeholder {
+  color: gray;
+}`
+  }}
+
+  <h2>CSS</h2>
+  {{ highlight (trim $css "\n") "css" }}
+
+  <h2>CSS after PostCSS (autoprefix)</h2>
+  {{ with $css | resources.FromString "temp/css" | postCSS }}
+    {{ highlight (.Content | strings.TrimSpace) "css" }}
+  {{ end }}
+
+{{ end }}

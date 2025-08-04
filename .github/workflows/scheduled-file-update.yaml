@@ -1,0 +1,40 @@
+# This cron job periodically updates the scheduled-file-update.txt file in the
+# root of this repository. Each update trigger a Cloudflare Worker build.
+
+name: Scheduled File Update
+
+on:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: '57 21 * * *'
+
+jobs:
+  update-file:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    env:
+      FILE_TO_UPDATE: scheduled-file-update.txt
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Update file with current timestamp
+        run: |
+          echo "$(date '+%Y-%m-%d %H:%M:%S')" > "${FILE_TO_UPDATE}"
+
+      - name: Commit and push changes
+        run: |
+          git add .
+          git commit -m "Automated: Update ${FILE_TO_UPDATE} via scheduled job"
+          git push

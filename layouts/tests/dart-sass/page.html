@@ -1,0 +1,26 @@
+{{ define "main" }}
+  <h1>{{ .Title }}</h1>
+  {{ partial "dates.html" . }}
+  {{ .Content }}
+  {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+
+  {{ $sass := `
+@use "sass:math";
+
+.foo {
+  p {
+    font-size: math.div(36px, 2);
+  }
+}`
+  }}
+
+  <h2>Sass</h2>
+  {{ highlight (trim $sass "\n") "scss" }}
+
+  <h2>Transpiled to CSS using Dart Sass</h2>
+  {{ $opts := dict "transpiler" "dartsass" }}
+  {{ with $sass | resources.FromString "temp/sass" | toCSS $opts }}
+    {{ highlight (.Content | strings.TrimSpace) "scss" }}
+  {{ end }}
+
+{{ end }}
