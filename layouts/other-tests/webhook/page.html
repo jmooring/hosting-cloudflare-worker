@@ -1,0 +1,27 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+{{ .Content }}
+
+{{ $json := dict }}
+{{ $url := "https://data.norges-bank.no/api/data/EXR/B.EUR.NOK.SP?format=sdmx-json&lastNObservations=1&locale=en" }}
+{{ $opts := dict "key" (now.Format "2006-01-02T15:04:05") }}
+{{ with try (resources.GetRemote $url $opts) }}
+	{{ with .Err }}
+		{{ errorf "%s" . }}
+	{{ else with .Value }}
+		{{ $json = . | transform.Unmarshal }}
+	{{ else }}
+		{{ errorf "Unable to get remote resource %q" $url }}
+	{{ end }}
+{{ end }}
+
+{{ with $json }}
+	{{ $prepared := (time.AsTime .meta.prepared "Etc/UTC").Local | time.Format "2 Jan 2006 at 3:04:05 PM MST" }}
+	{{ $exchangeRate := index .data.dataSets 0 "series" "0:0:0:0" "observations" "0" 0 | cast.ToFloat }}
+	{{ $baseCurrency := index (where .data.structure.dimensions.series "id" "BASE_CUR") 0 "values" 0 "id" }}
+	{{ $quoteCurrency := index (where .data.structure.dimensions.series "id" "QUOTE_CUR") 0 "values" 0 "id" }}
+	<p>Rate: {{ printf "%s/%s %.2f" $baseCurrency $quoteCurrency $exchangeRate }}</p>
+	<p>Prepared: {{ $prepared }}</p>
+{{ end }}
+
+{{ end }}
