@@ -1,0 +1,13 @@
+name: Scheduled Cloudflare Deploy
+on:
+  workflow_dispatch:
+  schedule:
+    # 7:42 UTC every day.
+    - cron: '42 7 * * *'
+jobs:
+  trigger-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Cloudflare Deploy Hook
+        run: |
+          curl -X POST "${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}"

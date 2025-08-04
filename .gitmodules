@@ -1,0 +1,3 @@
+[submodule "themes/hugo-theme-example"]
+	path = themes/hugo-theme-example
+	url = https://github.com/jmooring/hugo-theme-example

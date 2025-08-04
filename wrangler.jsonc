@@ -1,0 +1,13 @@
+{
+  // Set this to the name of your project.
+  "name": "hosting-cloudflare-worker",
+  // Set this to today's date in YYYY-MM-DD format.
+  "compatibility_date": "2026-06-19",
+  "build": {
+    "command": "chmod a+x build.sh && ./build.sh"
+  },
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "404-page"
+  }
+}

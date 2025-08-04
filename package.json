@@ -1,0 +1,8 @@
+{
+  "workspaces": [
+    "packages/hugoautogen"
+  ],
+  "allowScripts": {
+    "@parcel/watcher@2.5.1": true
+  }
+}
