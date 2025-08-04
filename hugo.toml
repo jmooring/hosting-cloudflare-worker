@@ -1,0 +1,61 @@
+baseURL       = 'https://hosting-cloudflare-worker.joe-mooring.workers.dev/'
+languageCode  = 'en-US'
+title         = 'Hosting Test - Cloudflare Worker'
+enableGitInfo = true
+
+# -----------------------------------------------------------------------------
+# Caches
+# -----------------------------------------------------------------------------
+
+[caches.images]
+  dir = ':cacheDir/images'
+
+# -----------------------------------------------------------------------------
+# Markup
+# -----------------------------------------------------------------------------
+
+[markup.goldmark.renderHooks.image]
+  useEmbedded = 'always'
+
+[markup.goldmark.renderHooks.link]
+  useEmbedded = 'always'
+
+# -----------------------------------------------------------------------------
+# Menus
+# -----------------------------------------------------------------------------
+
+[[menus.main]]
+  name    = 'Home'
+  pageRef = '/'
+  weight  = 10
+
+[[menus.main]]
+  name    = 'Articles'
+  pageRef = '/articles'
+  weight  = 20
+
+[[menus.main]]
+  name    = 'Books'
+  pageRef = '/books'
+  weight  = 30
+
+[[menus.main]]
+  name    = 'Tags'
+  pageRef = '/tags'
+  weight  = 40
+
+[[menus.main]]
+  name    = 'Tests'
+  pageRef = '/tests'
+  weight  = 50
+
+# -----------------------------------------------------------------------------
+# Module
+# -----------------------------------------------------------------------------
+
+[module.hugoVersion]
+  extended = true
+  min      = '0.147.0'
+
+[[module.imports]]
+  path = 'github.com/jmooring/hugo-module-content'
