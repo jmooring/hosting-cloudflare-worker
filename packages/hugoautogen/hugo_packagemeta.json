@@ -1,0 +1,17 @@
+{
+  "sum": "114984589f6e2fa4",
+  "dependencySources": {
+    "dependencies": {},
+    "devDependencies": {
+      "@babel/cli": "github.com/jmooring/hugo-module-feature-test",
+      "@babel/core": "github.com/jmooring/hugo-module-feature-test",
+      "@babel/preset-env": "github.com/jmooring/hugo-module-feature-test",
+      "@tailwindcss/cli": "github.com/jmooring/hugo-module-feature-test",
+      "@tailwindcss/typography": "github.com/jmooring/hugo-module-feature-test",
+      "autoprefixer": "github.com/jmooring/hugo-module-feature-test",
+      "postcss": "github.com/jmooring/hugo-module-feature-test",
+      "postcss-cli": "github.com/jmooring/hugo-module-feature-test",
+      "tailwindcss": "github.com/jmooring/hugo-module-feature-test"
+    }
+  }
+}
