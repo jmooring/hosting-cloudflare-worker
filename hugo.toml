@@ -1,0 +1,23 @@
+baseURL = 'https://hosting-cloudflare-worker.joe-mooring.workers.dev/'
+locale  = 'en-US'
+title   = 'Hosting Test - Cloudflare Worker'
+
+enableGitInfo = true
+
+[caches]
+  _merge = 'deep'
+
+[cascade]
+  _merge = 'deep'
+
+[markup]
+  _merge = 'deep'
+
+[security]
+  _merge = 'deep'
+
+[[module.imports]]
+  path = 'github.com/jmooring/hugo-module-feature-test'
+
+[[module.imports]]
+  path = 'hugo-theme-example'
