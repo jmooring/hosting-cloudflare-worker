@@ -8,4 +8,4 @@ command = "chmod a+x build.sh && ./build.sh"
 
 [assets]
 directory = "./public"
-not_found_handling = "404"
+not_found_handling = "404-page"
